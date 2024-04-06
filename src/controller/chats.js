@@ -10,7 +10,7 @@ const Users = require("../models/users");
 const Messages = require("../models/messages");
 
 module.exports = {
-//create
+
     createChat: async (req, res) => {
         const userId = req.user.toString()
         const { secondId } = req.params
