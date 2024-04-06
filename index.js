@@ -69,7 +69,7 @@ app.all("/", (req, res) => {
 });
 
 /*--------------------------------------*/
-
+//! Cron
 cron.schedule("* * * * *", async () => {
   try {
     await notes.deleteMany({ expiresAt: { $lte: new Date() } });
