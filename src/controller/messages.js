@@ -28,7 +28,7 @@ module.exports = {
       { runValidators: true }
     );
 
-    await Chats.updateOne({ _id: chatId }, { $push: { messages: message }});
+    await Chats.updateOne({ _id: chatId }, { $push: { messages: {text:message, date:message?.createdAt} }});
 
     try {
       if (messageId) {
