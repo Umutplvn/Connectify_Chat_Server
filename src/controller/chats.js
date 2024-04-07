@@ -39,7 +39,7 @@ module.exports = {
         const {chatId} = req.body
     
         try {
-            const readChat = await Chats.updateOne({ _id: chatId }, { $set: { "messages.$[].text": "" } });
+            const readChat = await Chats.updateOne({ _id: chatId }, { $set: { count: 0 } });
             res.status(200).json(readChat)
             
         } catch (error) {
