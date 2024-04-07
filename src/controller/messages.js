@@ -28,11 +28,9 @@ module.exports = {
       { runValidators: true }
     );
 
-    // Yeni mesajı ekleyerek güncelleme
     await Chats.updateOne(
       { _id: chatId },
-      { $push: { messages: message }, $inc: { count: 1 } } // count değerini 1 artır
-    );
+      { messages: message , $inc: { count: 1 } } );
 
     try {
       const response = await message.save();
