@@ -13,7 +13,7 @@ const ChatSchema= new mongoose.Schema({
         type:Boolean,
         default:false
     },
-    messages:[{type:Object}]
+    messages:{type:Object}
         
 },{timestamps:true, collection:"chats"})
 

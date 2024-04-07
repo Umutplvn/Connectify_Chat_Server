@@ -32,7 +32,7 @@ module.exports = {
 
     await Chats.updateOne(
       { _id: chatId },
-      { $push: { messages: message }, count: count + 1 }
+       { messages: message, count: count + 1 }
     );
 
     try {
