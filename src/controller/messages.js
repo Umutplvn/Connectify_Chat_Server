@@ -28,10 +28,15 @@ module.exports = {
       { runValidators: true }
     );
 
+
     await Chats.updateOne(
       { _id: chatId },
-      { messages: message , $inc: { count: 1 } } );
-
+      { 
+        $push: { messages: message },
+        $set: { lastMessage: message } 
+      }
+    );
+    
     try {
       const response = await message.save();
       res.status(200).send({

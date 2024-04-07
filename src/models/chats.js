@@ -1,28 +1,33 @@
-"use strict"
+"use strict";
 
 /*--------------------------------------*
 Connectify
 /*--------------------------------------*/
 
-const mongoose=require('mongoose')
+const mongoose = require("mongoose");
 
-const ChatSchema= new mongoose.Schema({
-
-    members:Array,
-    show:{
-        type:Boolean,
-        default:false
+const ChatSchema = new mongoose.Schema(
+  {
+    members: Array,
+    show: {
+      type: Boolean,
+      default: false,
     },
     messages: [
-        {
-          type: Object,
-        }
-      ],
-      count: {
-        type: Number,
-        default: 0 
-      }
-        
-},{timestamps:true, collection:"chats"})
+      {
+        type: Object,
+      },
+    ],
+    count: {
+      type: Number,
+      default: 0,
+    },
 
-module.exports = mongoose.model('Chats', ChatSchema)
+    lastMessage: {
+      type: Object,
+    },
+  },
+  { timestamps: true, collection: "chats" }
+);
+
+module.exports = mongoose.model("Chats", ChatSchema);
