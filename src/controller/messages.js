@@ -32,11 +32,11 @@ module.exports = {
     await Chats.updateOne(
       { _id: chatId },
       { 
-        $push: { messages: message },
+        $push: { messages: senderId },
         $set: { lastMessage: message } 
       }
     );
-    
+
     try {
       const response = await message.save();
       res.status(200).send({

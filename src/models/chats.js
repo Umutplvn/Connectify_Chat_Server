@@ -15,14 +15,9 @@ const ChatSchema = new mongoose.Schema(
     },
     messages: [
       {
-        type: Object,
+        type: String,
       },
     ],
-    count: {
-      type: Number,
-      default: 0,
-    },
-
     lastMessage: {
       type: Object,
     },
