@@ -28,7 +28,12 @@ module.exports = {
       { runValidators: true }
     );
 
-    await Chats.updateOne({ _id: chatId }, { $push: { messages: {text:message, date:message?.createdAt} }});
+    let count=0
+
+    await Chats.updateOne(
+      { _id: chatId },
+      { $push: { messages: message }, count: count + 1 }
+    );
 
     try {
       if (messageId) {
