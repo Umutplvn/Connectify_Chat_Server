@@ -13,7 +13,16 @@ const ChatSchema= new mongoose.Schema({
         type:Boolean,
         default:false
     },
-    messages:{type:Object}
+    messages: [
+        {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: 'Message'
+        }
+      ],
+      count: {
+        type: Number,
+        default: 0 
+      }
         
 },{timestamps:true, collection:"chats"})
 

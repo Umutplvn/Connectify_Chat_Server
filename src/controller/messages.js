@@ -28,32 +28,24 @@ module.exports = {
       { runValidators: true }
     );
 
-    let count=0
-
+    // Yeni mesajı ekleyerek güncelleme
     await Chats.updateOne(
       { _id: chatId },
-       { messages: message, count: count + 1 }
+      { $push: { messages: message }, $inc: { count: 1 } } // count değerini 1 artır
     );
 
     try {
-      if (messageId) {
-        const response = await message.save();
-        res.status(200).send({
-          error: false,
-          response
-        });
-      } else {
-        const response = await message.save();
-        res.status(200).send({
-          error: false,
-          response,
-        });
-      }
+      const response = await message.save();
+      res.status(200).send({
+        error: false,
+        response,
+      });
     } catch (error) {
       console.log(error);
       res.status(500).send(error);
     }
-  },
+},
+
 
   getMessages: async (req, res) => {
     const { chatId } = req.params;
