@@ -39,8 +39,12 @@ module.exports = {
         const {chatId} = req.body
     
         try {
-            const readChat = await Chats.updateOne({ _id: chatId }, { $set: { count: 0 } });
-            res.status(200).json(readChat)
+            const chat = await Chats.findOne(chatId);
+            const updatedMessages = chat.messages.filter(message => message !== req.user);
+
+            const updatedChat = await Chats.updateOne({ _id: chatId }, { $set: { messages: updatedMessages } });
+            
+            res.status(200).json(updatedChat)
             
         } catch (error) {
             console.log(error);
