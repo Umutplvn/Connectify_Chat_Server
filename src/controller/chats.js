@@ -37,13 +37,13 @@ module.exports = {
 
     readMessagesInChat: async (req, res) => {
         const {chatId} = req.body
-    
+
         try {
-            const chat = await Chats.findOne(chatId);
-            const updatedMessages = chat.messages.filter(message => message !== req.user);
+            const chat = await Chats.findOne({_id:chatId});
+            const updatedMessages = chat.messages.filter(message => message !== req.user.toString());
 
             const updatedChat = await Chats.updateOne({ _id: chatId }, { $set: { messages: updatedMessages } });
-            
+
             res.status(200).json(updatedChat)
             
         } catch (error) {
