@@ -98,6 +98,34 @@ module.exports = {
     }
   },
 
+  removeFavMessage: async (req, res) => {
+    const { messageId } = req.body;
+
+    try {
+
+      const user = await Users.findOne({ _id: req.user });
+      const check = user.favMessages.filter(
+        (item) => item?.info?._id !== messageId
+      );
+      
+        await Users.updateOne(
+          { _id: req.user },
+          { $set: { favMessages: check }  }
+        );
+
+        const data = await Users.findOne({ _id: req.user });
+        res.status(200).send({
+          response:data.favMessages,
+        });
+
+    } catch (error) {
+      console.log(error);
+      res.status(500).send(error);
+    }
+  },
+
+
+
   addReaction: async (req, res) => {
     const { messageId } = req.body;
     const { reaction } = req.body;

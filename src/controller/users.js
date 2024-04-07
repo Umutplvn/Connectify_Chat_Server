@@ -80,7 +80,6 @@ module.exports = {
 
   update: async (req, res) => {
     const userId = req.user;
-
     const updateData = req.body;
     const updatedUser = await User.findOneAndUpdate(
       { _id: userId },
