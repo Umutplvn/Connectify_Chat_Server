@@ -24,7 +24,7 @@ app.use(require("cors")());
 //! Socketio
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:3000",
+    origin: "https://connectify.netlify.app/",
     methods: ["GET", "POST", "PUT"],
   },
 });
@@ -92,5 +92,5 @@ app.use("/app", require("./src/routes/stories"));
 //! errorHandler:
 app.use(require("./src/errorHandler"));
 /*--------------------------------------*/
-app.listen(PORT, ()=>console.log(`App is running: ${HOST}:${PORT} `))
-// server.listen(PORT, () => console.log(`App is running: ${HOST}:${PORT} `));
+// app.listen(PORT, ()=>console.log(`App is running: ${HOST}:${PORT} `))
+server.listen(PORT, () => console.log(`App is running: ${HOST}:${PORT} `));
