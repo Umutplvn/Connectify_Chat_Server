@@ -127,6 +127,19 @@ module.exports = {
     });
   },
 
+  syncContacts: async (req, res) => {
+    const userId = req.user;
+    const user = await User.findOne({ _id: userId });
+  
+    const cleanedContacts = user.contacts.filter(contact => !contact.deleted);
+  
+    res.status(200).send({
+      error: false,
+      activeContacts: cleanedContacts,
+    });
+  },
+
+
   addcontact: async (req, res) => {
     const { contactId } = req.body;
     const userId = req.user;
@@ -181,7 +194,7 @@ module.exports = {
       { _id: userId },
       {deleted:true},
       { new: true, runValidators: true })
-      
+
     const contacts = await User.find({ "contacts._id": { $eq: userId } });
     for (const contact of contacts) {
       const updatedContacts = contact.contacts.map(ct => {
