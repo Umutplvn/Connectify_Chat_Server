@@ -142,8 +142,8 @@ module.exports = {
     });
 
     if (!contactExists) {
-      const { _id, image, email, username, name, createdAt } = user; 
-      await User.updateOne({ _id: userId }, { $push: { contacts: {_id, image, email, username, name, createdAt } } });
+      const { _id, image, email, username, name, createdAt, deleted } = user; 
+      await User.updateOne({ _id: userId }, { $push: { contacts: {_id, image, email, username, name, createdAt, deleted } } });
 
     }
     const updatedUser = await User.findOne({ _id: userId });
@@ -162,7 +162,7 @@ module.exports = {
 
     const { _id, image, email, username, name, createdAt } = user; 
 
-    await User.updateOne({ _id: userId }, { $pull: { contacts: {_id, image, email, username, name, createdAt }} });
+    await User.updateOne({ _id: userId }, { $pull: { contacts: {_id, image, email, username, name, createdAt, deleted }} });
     const updatedUser = await User.findOne({ _id: userId });
 
     res.status(202).send({
