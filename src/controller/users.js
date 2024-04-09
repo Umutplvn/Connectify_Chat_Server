@@ -177,17 +177,11 @@ module.exports = {
 
     //New data line
 
-    const updatedUser = await User.updateOne(
-      { _id: req.params.userId },
-      {deleted:true},
-      { new: true, runValidators: true }
-    );
-
     const contacts = await User.find({ "contacts._id": { $eq: req.params.userId } });
     for (const contact of contacts) {
       const updatedContacts = contact.contacts.map(ct => {
         if (ct._id.toString() === req.params.userId.toString()) {
-          return updatedUser;
+          return {...ct, deleted: true}; 
         } else {
           return ct;
         }
