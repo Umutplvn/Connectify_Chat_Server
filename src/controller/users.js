@@ -160,7 +160,7 @@ module.exports = {
 
     const user = await User.findOne({ _id: contactId });
 
-    const { _id, image, email, username, name, createdAt } = user; 
+    const { _id, image, email, username, name, createdAt, deleted } = user; 
 
     await User.updateOne({ _id: userId }, { $pull: { contacts: {_id, image, email, username, name, createdAt, deleted }} });
     const updatedUser = await User.findOne({ _id: userId });
