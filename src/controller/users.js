@@ -189,7 +189,7 @@ module.exports = {
 
 
     //////////////////////////
-
+    await User.updateOne({_id:req.params.userId}, {deleted:true})
     const data = await User.deleteOne({ _id: req.params.userId });
     await Token.deleteOne({ userId: req.params.userId });
 
