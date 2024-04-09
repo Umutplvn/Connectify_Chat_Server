@@ -130,12 +130,12 @@ module.exports = {
   syncContacts: async (req, res) => {
     const userId = req.user;
     const user = await User.findOne({ _id: userId });
-  
     const cleanedContacts = user.contacts.filter(contact => !contact.deleted);
+    await User.updateOne({ _id: userId }, {contacts:cleanedContacts});
   
     res.status(200).send({
       error: false,
-      activeContacts: cleanedContacts,
+      contacts: cleanedContacts,
     });
   },
 
