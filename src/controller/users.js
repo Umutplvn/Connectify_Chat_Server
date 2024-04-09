@@ -118,6 +118,7 @@ module.exports = {
       username: contact.username,
       image: contact.image,
       bio:contact.bio,
+      deleted:contact.deleted
     }));
 
     res.status(202).send({
