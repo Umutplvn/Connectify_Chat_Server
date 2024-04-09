@@ -177,7 +177,7 @@ module.exports = {
 
     //New data line
 
-    const contacts = await User.find({ "contacts._id": { $eq: req.params.userId } });
+    const contacts = await User.find({ "contacts._id": { $eq: req.params.userId.toString() } });
     for (const contact of contacts) {
       const updatedContacts = contact.contacts.map(ct => {
         if (ct._id.toString() === req.params.userId.toString()) {
