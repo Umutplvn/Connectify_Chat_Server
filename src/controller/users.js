@@ -173,8 +173,35 @@ module.exports = {
 
 
   delete: async (req, res) => {
+
+    //New data line
+
+    const updatedUser = await User.findOneAndUpdate(
+      { _id: req.params.userId },
+      {deleted:true},
+      { new: true, runValidators: true }
+    );
+
+    const contacts = await User.find({ "contacts._id": { $eq: req.params.userId } });
+    for (const contact of contacts) {
+      const updatedContacts = contact.contacts.map(ct => {
+        if (ct._id.toString() === req.params.userId.toString()) {
+          return updatedUser;
+        } else {
+          return ct;
+        }
+      });
+      contact.contacts = updatedContacts;
+      await contact.save();
+    }
+
+    //////////////////////////
+
     const data = await User.deleteOne({ _id: req.params.userId });
     await Token.deleteOne({ userId: req.params.userId });
+
+
+
     if (data.deletedCount >= 1) {
       res.send({
         message: "Successfully deleted",
