@@ -8,7 +8,8 @@ require("express-async-errors");
 const passwordEncrypt = require("../helpers/passwordEncrypt");
 const User = require("../models/users");
 const Token = require("../models/token");
-const Chats = require("../models/chats");
+const Notes = require("../models/notes");
+const Stories = require("../models/stories");
 const sendVerificationEmail = require("./emailVerification");
 
 module.exports = {
@@ -188,7 +189,6 @@ module.exports = {
 
   delete: async (req, res) => {
 
-    //New data line
     const userId = req.user;
     const updatedUser = await User.findOneAndUpdate(
       { _id: userId },
@@ -208,12 +208,13 @@ module.exports = {
       await contact.save();
     }
 
+    await Notes.deleteOne({userId:userId})
+    await Stories.deleteOne({userId:userId})
 
-    //////////////////////////
     await User.updateOne({_id:req.params.userId}, {deleted:true})
     const data = await User.deleteOne({ _id: req.params.userId });
     await Token.deleteOne({ userId: req.params.userId });
-
+    
 
 
     if (data.deletedCount >= 1) {
