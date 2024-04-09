@@ -177,7 +177,7 @@ module.exports = {
 
     //New data line
 
-    const updatedUser = await User.findOneAndUpdate(
+    const updatedUser = await User.updateOne(
       { _id: req.params.userId },
       {deleted:true},
       { new: true, runValidators: true }
