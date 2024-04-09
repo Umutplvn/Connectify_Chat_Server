@@ -24,7 +24,7 @@ app.use(require("cors")());
 //! Socketio
 const io = new Server(server, {
   cors: {
-    origin: "https://connectify.netlify.app/",
+    origin: "https://connectify-umut.netlify.app/",
     methods: ["GET", "POST", "PUT"],
   },
 });
