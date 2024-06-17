@@ -45,6 +45,7 @@ const UserSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+
     status: String,
     verified: {
       type: Boolean,
@@ -60,7 +61,9 @@ const UserSchema = new mongoose.Schema(
 
     favMessages: [{ type: Object }],
   },
+
   { timestamps: true, collection: "user" }
+  
 );
 
 module.exports = mongoose.model("User", UserSchema);
