@@ -1,8 +1,3 @@
-"use strict";
-
-/*--------------------------------------*
-Connectify
-/*--------------------------------------*/
 
 const express = require("express");
 const app = express();

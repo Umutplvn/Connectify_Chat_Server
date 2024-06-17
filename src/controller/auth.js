@@ -11,7 +11,7 @@ module.exports = {
     if (password && email) {
      
       const user = await User.findOne({ email: email, password: password });
-      const isVerified=user.verified
+      const isVerified=user?.verified
       
         if (user) {
           const tokenData ="Token "+passwordEncrypt(user._id+`${new Date()}`);
