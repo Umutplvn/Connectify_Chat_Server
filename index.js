@@ -17,30 +17,30 @@ app.use(express.json());
 app.use(require("cors")());
 
 //! Socketio
-const io = new Server(server, {
-  cors: {
-    origin: "https://connectify-umut.netlify.app",
-    methods: ["GET", "POST", "PUT"],
-  },
-});
+// const io = new Server(server, {
+//   cors: {
+//     origin: "https://connectify-umut.netlify.app",
+//     methods: ["GET", "POST", "PUT"],
+//   },
+// });
 
-let onlineUsers = [];
+// let onlineUsers = [];
 
-io.on("connection", (socket) => {
-  socket.on("addNewUser", (userId) => {
-    !onlineUsers.some((user) => user.userId === userId) &&
-      onlineUsers.push({
-        userId,
-        socketId: socket.id,
-      });
-    io.emit("getOnlineUsers", onlineUsers);
-  });
+// io.on("connection", (socket) => {
+//   socket.on("addNewUser", (userId) => {
+//     !onlineUsers.some((user) => user.userId === userId) &&
+//       onlineUsers.push({
+//         userId,
+//         socketId: socket.id,
+//       });
+//     io.emit("getOnlineUsers", onlineUsers);
+//   });
 
-  socket.on("disconnect", () => {
-    onlineUsers = onlineUsers.filter((user) => user.socketId !== socket.id);
-    io.emit("getOnlineUsers", onlineUsers);
-  });
-});
+//   socket.on("disconnect", () => {
+//     onlineUsers = onlineUsers.filter((user) => user.socketId !== socket.id);
+//     io.emit("getOnlineUsers", onlineUsers);
+//   });
+// });
 
 /*--------------------------------------*/
 
@@ -89,3 +89,5 @@ app.use(require("./src/errorHandler"));
 /*--------------------------------------*/
 app.listen(PORT, ()=>console.log(`App is running: ${HOST}:${PORT} `))
 // server.listen(PORT, () => console.log(`App is running: ${HOST}:${PORT} `));
+
+module.exports=app
