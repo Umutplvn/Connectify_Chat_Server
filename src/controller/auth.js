@@ -17,7 +17,6 @@ module.exports = {
           const tokenData ="Token "+passwordEncrypt(user._id+`${new Date()}`);
           if(isVerified){
             await Token.create({ userId: user._id, token: tokenData });
-  
             res.status(200).send({
                 error: false,
                 result:user,
@@ -37,8 +36,6 @@ module.exports = {
         res.errorStatusCode = 401;
         throw new Error("Login parameters are not true.");
       }
-
-
     } 
     
     else {
